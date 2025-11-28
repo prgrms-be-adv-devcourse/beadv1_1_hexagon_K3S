@@ -1,0 +1,15 @@
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+
+# IntelliJ 설정 관련 캐시/로그
+out/
+*.log
+
+# OS별 불필요 파일
+.DS_Store
+Thumbs.db
+
+# 기타 IDE에서 생성하는 임시 파일
+*.class
