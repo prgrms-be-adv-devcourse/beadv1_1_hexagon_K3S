@@ -1,0 +1,7 @@
+apiVersion: v1
+
+kind: ConfigMap
+
+metadata:
+  ## 해당 메타 데이터로 config map을 찾음.
+  name: test-config
