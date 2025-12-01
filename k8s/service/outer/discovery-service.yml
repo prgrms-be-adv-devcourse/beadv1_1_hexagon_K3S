@@ -5,7 +5,7 @@ metadata:
   name: eureka-server
 spec:
   selector:
-    app: eureka-server
+    app: hexagon-discovery-service
   ports:
     - port: 8761
       targetPort: 8761
