@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hexagon-communication-service  # inputs.service-name 대체
+  labels:
+    app: hexagon-communication-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hexagon-communication-service
+  template:
+    metadata:
+      labels:
+        app: hexagon-communication-service
+    spec:
+      containers:
+        - name: hexagon-communication-service
+          image: kimtaewanpea/hexagon-communication-service:latest  # GitHub Actions 변수 대체
+          ports:
+            - containerPort: 8082  # 서비스 포트 필요시 수정
+          envFrom:
+            - secretRef:
+                name: mysql-secret

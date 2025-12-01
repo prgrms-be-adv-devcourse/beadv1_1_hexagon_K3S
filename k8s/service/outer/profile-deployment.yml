@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hexagon-profile-service  # inputs.service-name 대체
+  labels:
+    app: hexagon-profile-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hexagon-profile-service
+  template:
+    metadata:
+      labels:
+        app: hexagon-profile-service
+    spec:
+      containers:
+        - name: hexagon-profile-service
+          image: kimtaewanpea/hexagon-profile-service:latest  # GitHub Actions 변수 대체
+          ports:
+            - containerPort: 8086  # 서비스 포트 필요시 수정
+          envFrom:
+            - secretRef:
+                name: mysql-secret

@@ -13,3 +13,7 @@ Thumbs.db
 
 # 기타 IDE에서 생성하는 임시 파일
 *.class
+
+k8s/infra/secret
+
+**/secret

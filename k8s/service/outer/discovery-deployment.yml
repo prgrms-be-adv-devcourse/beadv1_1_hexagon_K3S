@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hexagon-discovery-service  # inputs.service-name 대체
+  labels:
+    app: hexagon-discovery-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hexagon-discovery-service
+  template:
+    metadata:
+      labels:
+        app: hexagon-discovery-service
+    spec:
+      containers:
+        - name: hexagon-discovery-service
+          image: kimtaewanpea/hexagon-discovery-service:latest  # GitHub Actions 변수 대체
+          ports:
+            - containerPort: 8761  # 서비스 포트 필요시 수정

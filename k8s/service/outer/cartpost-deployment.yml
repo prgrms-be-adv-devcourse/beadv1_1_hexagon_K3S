@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hexagon-cartpost-service  # inputs.service-name 대체
+  labels:
+    app: hexagon-cartpost-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hexagon-cartpost-service
+  template:
+    metadata:
+      labels:
+        app: hexagon-cartpost-service
+    spec:
+      containers:
+        - name: hexagon-cartpost-service
+          image: kimtaewanpea/hexagon-cartpost-service:latest  # GitHub Actions 변수 대체
+          ports:
+            - containerPort: 8081
+          envFrom:
+            - secretRef:
+                name: mysql-secret

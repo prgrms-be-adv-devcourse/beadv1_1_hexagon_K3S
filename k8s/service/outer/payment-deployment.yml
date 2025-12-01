@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hexagon-payment-service  # inputs.service-name 대체
+  labels:
+    app: hexagon-payment-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hexagon-payment-service
+  template:
+    metadata:
+      labels:
+        app: hexagon-payment-service
+    spec:
+      containers:
+        - name: hexagon-payment-service
+          image: kimtaewanpea/hexagon-payment-service:latest  # GitHub Actions 변수 대체
+          ports:
+            - containerPort: 8085  # 서비스 포트 필요시 수정
+          envFrom:
+            - secretRef:
+                name: mysql-secret
