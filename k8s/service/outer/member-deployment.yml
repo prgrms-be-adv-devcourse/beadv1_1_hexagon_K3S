@@ -32,3 +32,5 @@ spec:
                 name: google-secret
             - secretRef:
                 name: jwt-secret
+            - secretRef:
+                name: ec2-secret
