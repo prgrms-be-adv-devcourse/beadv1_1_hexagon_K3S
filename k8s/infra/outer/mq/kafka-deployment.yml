@@ -1,23 +1,30 @@
+# Kafka PVC
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: kafka-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
 apiVersion: apps/v1
-
 kind: Deployment
-
 metadata:
   name: kafka
   labels:
     app: kafka
-
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: kafka
-
   template:
     metadata:
-      name: kafka
       labels:
         app: kafka
-
     spec:
       containers:
         - name: kafka
@@ -27,3 +34,10 @@ spec:
           envFrom:
             - configMapRef:
                 name: kafka-config-map
+          volumeMounts:
+            - name: kafka-storage
+              mountPath: /var/lib/kafka/data   # KAFKA_LOG_DIRS 위치
+      volumes:
+        - name: kafka-storage
+          persistentVolumeClaim:
+            claimName: kafka-pvc

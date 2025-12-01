@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hexagon-gateway-service  # inputs.service-name 대체
+  labels:
+    app: hexagon-gateway-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hexagon-gateway-service
+  template:
+    metadata:
+      labels:
+        app: hexagon-gateway-service
+    spec:
+      containers:
+        - name: hexagon-gateway-service
+          image: kimtaewanpea/hexagon-gateway-service:latest  # GitHub Actions 변수 대체
+          ports:
+            - containerPort: 8000  # 서비스 포트 필요시 수정
+          envFrom:
+            - secretRef:
+                name: jwt-secret

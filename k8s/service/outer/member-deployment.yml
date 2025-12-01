@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hexagon-member-service  # inputs.service-name 대체
+  labels:
+    app:  hexagon-member-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app:  hexagon-member-service
+  template:
+    metadata:
+      labels:
+        app:  hexagon-member-service
+    spec:
+      containers:
+        - name:  hexagon-member-service
+          image: kimtaewanpea/hexagon-member-service:latest  # GitHub Actions 변수 대체
+          ports:
+            - containerPort: 8084  # 서비스 포트 필요시 수정
+          envFrom:
+#            - configMapRef:
+#                name: -config  # ConfigMap 필요시
+            - secretRef:
+                name: mysql-secret
+            - secretRef:
+                name: kakao-secret
+            - secretRef:
+                name: naver-secret
+            - secretRef:
+                name: google-secret
+            - secretRef:
+                name: jwt-secret

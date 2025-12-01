@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ${SERVICE_NAME}  # inputs.service-name 대체
+  labels:
+    app: ${SERVICE_NAME}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ${SERVICE_NAME}
+  template:
+    metadata:
+      labels:
+        app: ${SERVICE_NAME}
+    spec:
+      containers:
+        - name: ${SERVICE_NAME}
+          image: kimtaewanpea/${SERVICE_NAME}:latest  # GitHub Actions 변수 대체
+          ports:
+            - containerPort: 8080  # 서비스 포트 필요시 수정

@@ -1,24 +1,17 @@
 apiVersion: apps/v1
-
-kind: Deployment
-
+kind: StatefulSet
 metadata:
   name: elasticsearch
-
 spec:
-
+  serviceName: elasticsearch  # Headless Service 이름
   replicas: 1
-
   selector:
     matchLabels:
       app: elasticsearch
-
   template:
-
     metadata:
       labels:
         app: elasticsearch
-
     spec:
       containers:
         - name: elasticsearch
@@ -28,3 +21,17 @@ spec:
           envFrom:
             - configMapRef:
                 name: elasticsearch-configmap
+          volumeMounts:
+            - name: elasticsearch-storage
+              mountPath: /usr/share/elasticsearch/data
+  volumeClaimTemplates:
+    - metadata:
+        name: elasticsearch-storage
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 100Mi
+          limits:
+            storage: 5Gi
