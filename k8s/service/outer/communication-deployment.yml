@@ -21,4 +21,4 @@ spec:
             - containerPort: 8082  # 서비스 포트 필요시 수정
           envFrom:
             - secretRef:
-                name: mysql-secret
+                name: mongo-secret

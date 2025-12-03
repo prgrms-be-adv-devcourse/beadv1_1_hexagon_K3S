@@ -21,6 +21,7 @@ spec:
           volumeMounts:
             - name: mongo-persistent-storage
               mountPath: /data/db
+          command: ["mongod", "--auth"]
   volumeClaimTemplates:
     - metadata:
         name: mongo-persistent-storage
