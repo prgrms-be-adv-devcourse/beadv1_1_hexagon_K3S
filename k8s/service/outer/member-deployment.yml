@@ -34,3 +34,5 @@ spec:
                 name: jwt-secret
             - secretRef:
                 name: ec2-secret
+            - secretRef:
+                name: mail-auth-secret
