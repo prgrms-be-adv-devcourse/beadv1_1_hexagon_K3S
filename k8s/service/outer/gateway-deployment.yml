@@ -22,3 +22,5 @@ spec:
           envFrom:
             - secretRef:
                 name: jwt-secret
+            - secretRef:
+                name: gateway-secret
