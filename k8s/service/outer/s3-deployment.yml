@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hexagon-s3-service  # inputs.service-name 대체
+  labels:
+    app: hexagon-s3-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hexagon-s3-service
+  template:
+    metadata:
+      labels:
+        app: hexagon-s3-service
+    spec:
+      containers:
+        - name: hexagon-s3-service
+          image: kimtaewanpea/hexagon-s3-service:latest  # GitHub Actions 변수 대체
+          ports:
+            - containerPort: 8088  # 서비스 포트 필요시 수정
+          envFrom:
+            - secretRef:
+                name: mysql-secret
+            - secretRef:
+                name: s3-secret
