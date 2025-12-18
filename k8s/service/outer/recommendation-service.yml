@@ -1,0 +1,11 @@
+# eureka-server (Service 필수)
+apiVersion: v1
+kind: Service
+metadata:
+  name: hexagon-recommendation-service
+spec:
+  selector:
+    app: hexagon-recommendation-service
+  ports:
+    - port: 8089
+      targetPort: 8089

@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hexagon-recommendation-service  # inputs.service-name 대체
+  labels:
+    app: hexagon-recommendation-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hexagon-recommendation-service
+  template:
+    metadata:
+      labels:
+        app: hexagon-recommendation-service
+    spec:
+      containers:
+        - name: hexagon-recommendation-service
+          image: kimtaewanpea/hexagon-recommendation-service:latest  # GitHub Actions 변수 대체
+          ports:
+            - containerPort: 8089  # 서비스 포트 필요시 수정
+          envFrom:
+            - secretRef:
+                name: ai-secret
