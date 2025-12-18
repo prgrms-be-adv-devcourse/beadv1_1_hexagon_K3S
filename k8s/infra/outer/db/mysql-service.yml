@@ -5,12 +5,10 @@ kind: Service
 metadata:
   # Cluster 내부에서 접근하는 이름 Ex jdbc:mysql/mysql:3306
   name: mysql
-
 spec:
-
   selector:
     app: mysql
-
+  type : NodePort
   ports:
     - targetPort: 3306
       port: 3306
