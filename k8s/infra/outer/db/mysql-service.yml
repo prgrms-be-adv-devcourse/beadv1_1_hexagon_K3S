@@ -12,3 +12,4 @@ spec:
   ports:
     - targetPort: 3306
       port: 3306
+      nodePort: 33000     # 외부 접근 고정 NodePort (30000-32767)
